@@ -1,11 +1,12 @@
 const notes = require('express').Router();
 const { readFromFile } = require('../helpers/fsUtils');
+const uuid = require('../helpers/uuid');
+
 const fs = require('fs');
 
 notes.get('/', (req, res) =>
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
 );
-
 
 notes.post('/', (req, res) => {
 
@@ -16,7 +17,7 @@ notes.post('/', (req, res) => {
         const newNotes = {
             title,
             text,
-            // note_id: uuid(),
+            id: uuid(),
         };
 
         fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -28,7 +29,7 @@ notes.post('/', (req, res) => {
 
                 fs.writeFile(
                     './db/db.json',
-                    JSON.stringify(parsedNotes, null, 2),
+                    JSON.stringify(parsedNotes, null, 3),
                     (writeErr) =>
                         writeErr
                             ? console.error(writeErr)
@@ -50,5 +51,31 @@ notes.post('/', (req, res) => {
         res.json('Error in posting note');
     }
 });
+
+
+notes.delete('/:id', (req, res) => {
+    console.log("delete");
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.sendStatus(500);
+        } else {
+            const notes = JSON.parse(data);
+            const noteId = req.params.id;
+
+            const filteredNotes = notes.filter((note) => note.id !== noteId);
+
+            fs.writeFile('./db/db.json', JSON.stringify(filteredNotes), (err) => {
+                if (err) {
+                    console.error(err);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(200);
+                }
+            });
+        }
+    });
+});
+
 
 module.exports = notes;
