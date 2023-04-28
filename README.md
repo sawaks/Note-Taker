@@ -3,6 +3,10 @@
 ## Description
 This project is the proof that I learned through week 11. This application must use an Express.js back end and will save and retrieve note data from a JSON file. Also It has the DELETE route for deleting the data saved before.
 
+<img width="928" alt="Screen Shot 2023-04-28 at 9 18 35 pm" src="https://user-images.githubusercontent.com/63826271/235135438-36a7d224-2ded-404c-8a43-5defa852d39a.png">
+
+<img width="928" alt="Screen Shot 2023-04-28 at 9 20 24 pm" src="https://user-images.githubusercontent.com/63826271/235135529-4f16e137-3c87-4d3d-a17c-e73f52245b19.png">
+
 ## Usage
 1. Open the Note Taker
 2. Type a note title and the note’s text
@@ -13,9 +17,9 @@ This project is the proof that I learned through week 11. This application must
 
 ## Contributor 
 This project has the starter code made by:
-https://github.com/Xandromus
-https://github.com/nol166
-https://github.com/Georgeyoo
+* https://github.com/Xandromus
+* https://github.com/nol166
+* https://github.com/Georgeyoo
 
 ## The URL of application deployed by Heroku 
 
