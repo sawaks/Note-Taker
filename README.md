@@ -22,6 +22,7 @@ This project has the starter code made by:
 * https://github.com/Georgeyoo
 
 ## The URL of application deployed by Heroku 
+https://note-taker-bysawako.herokuapp.com/
 
 ## The URL of GitHub Repository
 https://github.com/sawaks/Note-Taker.git
