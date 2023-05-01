@@ -1,11 +1,11 @@
 const notes = require('express').Router();
-const { readFromFile } = require('../helpers/fsUtils');
-const uuid = require('../helpers/uuid');
+const { readFromFile } = require('../develop/helpers/fsUtils');
+const uuid = require('../develop/helpers/uuid');
 
 const fs = require('fs');
 
 notes.get('/', (req, res) =>
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
+    readFromFile('./develop/db/db.json').then((data) => res.json(JSON.parse(data)))
 );
 
 notes.post('/', (req, res) => {
@@ -20,7 +20,7 @@ notes.post('/', (req, res) => {
             id: uuid(),
         };
 
-        fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        fs.readFile('./develop/db/db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -28,7 +28,7 @@ notes.post('/', (req, res) => {
                 parsedNotes.push(newNotes);
 
                 fs.writeFile(
-                    './db/db.json',
+                    './develop/db/db.json',
                     JSON.stringify(parsedNotes, null, 3),
                     (writeErr) =>
                         writeErr
@@ -55,7 +55,7 @@ notes.post('/', (req, res) => {
 
 notes.delete('/:id', (req, res) => {
     console.log("delete");
-    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+    fs.readFile('./develop/db/db.json', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             res.sendStatus(500);
@@ -65,7 +65,7 @@ notes.delete('/:id', (req, res) => {
 
             const filteredNotes = notes.filter((note) => note.id !== noteId);
 
-            fs.writeFile('./db/db.json', JSON.stringify(filteredNotes), (err) => {
+            fs.writeFile('./develop/db/db.json', JSON.stringify(filteredNotes), (err) => {
                 if (err) {
                     console.error(err);
                     res.sendStatus(500);
